@@ -1,13 +1,23 @@
-# basiclyJumpKingButBetter1
+# Jump Emperor (Basically Jump King but better) [workingtitle]
 
 ## Team
 
-- Aisha Faller
-- Mathias Hager
-- Jason Witzemann
-- Leonhard Loacker
-- Sebastian Bogensperger
+- Aisha Faller (Designer)
+- Mathias Hager (Developer)
+- Jason Witzemann (Developer)
+- Leonhard Loacker (Developer)
+- Sebastian Bogensperger (Developer)
 
 ## TODO
 
-- Everything
+- Level Design
+- Level Generation
+- Sprites
+- Animations
+- Sound Effects
+- Optional: Enemies
+- Optional: Background Music
+
+Maybe more...
+
+
