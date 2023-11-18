@@ -5,14 +5,14 @@ using UnityEngine;
 public class EnemyBehavior : MonoBehaviour
 {
     private float speed = 3f;
-    private float rayDist = 2f;
+    private float rayDistance = 2f;
     private bool movingRight;
     public Transform groundCollision;
 
     private void Update()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
-        RaycastHit2D groundCheck = Physics2D.Raycast(groundCollision.position, Vector2.down, rayDist);
+        RaycastHit2D groundCheck = Physics2D.Raycast(groundCollision.position, Vector2.down, rayDistance);
 
 
         if (!groundCheck.collider)
