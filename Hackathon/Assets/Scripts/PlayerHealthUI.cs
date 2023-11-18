@@ -11,13 +11,7 @@ public class PlayerHealthUI : MonoBehaviour
 
     void Start()
     {
-
-       
-            PlayerHealth.instance.EventHealthChanged += OnHealthChanged;
-        
-
-       
-
+       PlayerHealth.instance.EventHealthChanged += OnHealthChanged;
     }
 
    
@@ -29,12 +23,7 @@ public class PlayerHealthUI : MonoBehaviour
 
         float health = PlayerHealth.instance.currentHealth;
         float maxHealth = PlayerHealth.instance.maxHealth;
-   
 
-   
         HealthBarImage.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1f);
-
-    
-
-}
+    }
 }

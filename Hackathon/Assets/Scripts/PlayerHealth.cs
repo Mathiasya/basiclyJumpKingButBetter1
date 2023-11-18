@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -9,47 +7,41 @@ public class PlayerHealth : MonoBehaviour
     public Action EventHealthChanged;
     public float maxHealth = 100;
     public float currentHealth;
-    public float damageAmount = 20;
-   
+
+    private Rigidbody2D playerBody;
+
     void Awake()
     {
         if (instance != null)
+        {
             Destroy(gameObject);
+        }
         else
+        {
             instance = this;
-
+        }
         currentHealth = maxHealth;
-
-       
+        playerBody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
         if (currentHealth <= 0) {
-            die();
+            Die();
+        }
+        if (playerBody.velocity.y < -100f )
+        {
+            Debug.Log("Death by out of world");
+            Die();
         }
     }
 
-    public void getDamage() {
-        
-
+    public void GetDamage(float damageAmount) {
         currentHealth -= damageAmount;
-
-     
-            EventHealthChanged();
-        
-
+        EventHealthChanged();
     }
 
-
-
-    public void die() {
+    public void Die() {
         GameObject.Destroy(gameObject);
     }
-
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        getDamage();
-    }
-
 }
