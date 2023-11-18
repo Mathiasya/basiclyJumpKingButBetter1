@@ -1,16 +1,12 @@
 using UnityEngine;
 using System;
 
-
-
 public class PlayerHealth : MonoBehaviour
 {
     public static PlayerHealth instance;
     public Action EventHealthChanged;
     public float maxHealth = 100;
     public float currentHealth;
-
-    [SerializeField] private AudioSource deathSound;
 
     private Rigidbody2D playerBody;
 
@@ -46,7 +42,6 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void Die() {
-        deathSound.Play();
         GameObject.Destroy(gameObject);
     }
 }
