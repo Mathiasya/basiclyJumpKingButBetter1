@@ -33,11 +33,39 @@ public class EnemyBehavior : MonoBehaviour
 
         RaycastHit2D groundCheck = Physics2D.Raycast(groundCollision.position, Vector2.down, rayDistance);
 
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
-
-        if (!groundCheck.collider)
+        if (isPlayerNear && groundCheck.collider)
         {
-            Debug.Log("!near and !ground");
+            
+            float xPositionDifference = playerTransform.position.x - transform.position.x;
+
+            transform.rotation = xPositionDifference < 0 ? left : right;
+
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+
+        }
+        else if (isPlayerNear && !groundCheck.collider)
+        {
+           
+            if (movingRight)
+            {
+                
+                transform.eulerAngles = new Vector3(0, -180, 0);
+                movingRight = false;
+            }
+            else
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+                movingRight = true;
+            }
+
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+        }
+        else if (!isPlayerNear && groundCheck.collider)
+        {
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+        }
+        else if (!isPlayerNear && !groundCheck.collider)
+        {
             if (movingRight)
             {
                 transform.eulerAngles = new Vector3(0, -180, 0);
@@ -48,67 +76,8 @@ public class EnemyBehavior : MonoBehaviour
                 transform.eulerAngles = new Vector3(0, 0, 0);
                 movingRight = true;
             }
-
-        }
-
-        if (isPlayerNear && groundCheck)
-        {
-            Debug.Log("near and ground");
-            float xPositionDifference = playerTransform.position.x - transform.position.x;
-
-            transform.rotation = xPositionDifference < 0 ? left : right;
-
-            isPlayerNear = false;
-
-        }
-
-
-        /*
-        RaycastHit2D groundCheck = Physics2D.Raycast(groundCollision.position, Vector2.down, rayDistance);
-
-
-        if (isPlayerNear && groundCheck)
-        {
-            Debug.Log("near and ground");
-            float xPositionDifference = playerTransform.position.x - transform.position.x;
-
-            transform.rotation = xPositionDifference < 0 ? left : right;
-
-            isPlayerNear = false;
-
-        }
-       
-
-        
-        else
-        {
-
-            Debug.Log("!near and ground");
-
             transform.Translate(Vector2.right * speed * Time.deltaTime);
-
-
-
-            if (!groundCheck.collider)
-            {
-                Debug.Log("!near and !ground");
-                if (movingRight)
-                {
-                    transform.eulerAngles = new Vector3(0, -180, 0);
-                    movingRight = false;
-                }
-                else
-                {
-                    transform.eulerAngles = new Vector3(0, 0, 0);
-                    movingRight = true;
-                }
-
-            }
-
-
-        }*/
-
-
+        }
     }
 
     private void EnemyAttack() {
@@ -140,7 +109,14 @@ public class EnemyBehavior : MonoBehaviour
             isPlayerNear = true;
             EnemyAttack();
             capsuleCollider.enabled = true;
+            Debug.Log("ontriggerenter");
         } 
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        isPlayerNear = false;
+        Debug.Log("ontriggerexit");
     }
 
 
