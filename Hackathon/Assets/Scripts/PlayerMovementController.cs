@@ -9,6 +9,9 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private float jitterStrength;
     [SerializeField] private bool activateJitter;
     [SerializeField] private float waterSpeedRatio;
+    [SerializeField] private Animator animator;
+
+    [SerializeField] SpriteRenderer playerSpriteRenderer;
 
     private Rigidbody2D playerBody;
     private bool isAirBorne;
@@ -19,6 +22,8 @@ public class PlayerMovementController : MonoBehaviour
     private bool isInWater;
     private bool isInFlight;
     private float lastGravity;
+     
+    
 
 
     // Start is called before the first frame update
@@ -29,6 +34,7 @@ public class PlayerMovementController : MonoBehaviour
         baseMoveSpeed *= 10;
         footDirection = Vector2.down;
         playerBody = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -51,6 +57,9 @@ public class PlayerMovementController : MonoBehaviour
 
     void GroundMechanics()
     {
+        bool isWalking = false;
+        
+        
         if (isInWater)
         {
             playerBody.gravityScale /= waterSpeedRatio;
@@ -58,6 +67,16 @@ public class PlayerMovementController : MonoBehaviour
         }
         direction.x = Input.GetAxisRaw("Horizontal");
         direction = direction.normalized;
+
+        if (direction.x < 0)
+        {
+            playerSpriteRenderer.flipX = true;
+        }
+        else if (direction.x > 0)
+        {
+            playerSpriteRenderer.flipX = false;
+        }
+
         Vector2 velocity = baseMoveSpeed * Time.fixedDeltaTime * direction;
         velocity.x = Mathf.Lerp(playerBody.velocity.x, velocity.x, 0.25f);
         velocity.y = playerBody.velocity.y;
@@ -66,6 +85,16 @@ public class PlayerMovementController : MonoBehaviour
         {
             velocity = Jump(velocity, baseJumpStrength);
         }
+
+        if ((direction.x > 0.02f || direction.x < -0.02f) && !isWalking)
+        {
+            Debug.Log("Moving");
+            animator.SetBool("IsWalking", true);
+        }
+        else {
+            animator.SetBool("IsWalking", false);
+        }
+
 
         playerBody.velocity = Jitter(velocity);
 
@@ -81,6 +110,8 @@ public class PlayerMovementController : MonoBehaviour
             playerBody.gravityScale *= -1;
         }
     }
+
+    
 
     void WaterMechanics()
     {
