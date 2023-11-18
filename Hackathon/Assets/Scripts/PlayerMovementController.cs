@@ -10,6 +10,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private bool activateJitter;
     [SerializeField] private float waterSpeedRatio;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource audiosource;
 
     [SerializeField] SpriteRenderer playerSpriteRenderer;
 
@@ -19,9 +20,12 @@ public class PlayerMovementController : MonoBehaviour
     private Vector2 direction;
     private Vector2 footDirection;
 
-    private bool isInWater;
+    [SerializeField]private bool isInWater;
     private bool isInFlight;
     private float lastGravity;
+    private bool isWalking;
+    private bool isFlying;
+
      
     
 
@@ -34,7 +38,9 @@ public class PlayerMovementController : MonoBehaviour
         baseMoveSpeed *= 10;
         footDirection = Vector2.down;
         playerBody = GetComponent<Rigidbody2D>();
-        
+        isWalking = animator.GetBool("IsWalking");
+        isFlying = animator.GetBool("IsFlying");
+
     }
 
     // Update is called once per frame
@@ -57,11 +63,12 @@ public class PlayerMovementController : MonoBehaviour
 
     void GroundMechanics()
     {
-        bool isWalking = false;
+       
         
         
         if (isInWater)
         {
+            animator.SetBool("IsFlying", false);
             playerBody.gravityScale /= waterSpeedRatio;
             isInWater = false;
         }
@@ -86,7 +93,7 @@ public class PlayerMovementController : MonoBehaviour
             velocity = Jump(velocity, baseJumpStrength);
         }
 
-        if ((direction.x > 0.02f || direction.x < -0.02f) && !isWalking)
+        if ((direction.x > 0.02f || direction.x < -0.02f) && !isWalking && !isFlying)
         {
             Debug.Log("Moving");
             animator.SetBool("IsWalking", true);
@@ -111,15 +118,19 @@ public class PlayerMovementController : MonoBehaviour
         }
     }
 
-    
+
 
     void WaterMechanics()
     {
+
         if (!isInWater)
         {
             playerBody.gravityScale *= waterSpeedRatio;
             isInWater = true;
+            animator.SetBool("IsFlying", true);
+            animator.SetBool("IsWalking", false);
         }
+
 
         direction.x = Input.GetAxisRaw("Horizontal"); 
         direction.y = Input.GetAxisRaw("Vertical") * -footDirection.y;
