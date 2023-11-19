@@ -11,7 +11,7 @@ public class PlayerHealthUI : MonoBehaviour
 
     void Start()
     {
-       PlayerHealth.instance.EventHealthChanged += OnHealthChanged;
+       PlayerHealthSound.instance.EventHealthChanged += OnHealthChanged;
     }
 
    
@@ -21,8 +21,8 @@ public class PlayerHealthUI : MonoBehaviour
         
         Debug.Log("onhealt");
 
-        float health = PlayerHealth.instance.currentHealth;
-        float maxHealth = PlayerHealth.instance.maxHealth;
+        float health = PlayerHealthSound.instance.currentHealth;
+        float maxHealth = PlayerHealthSound.instance.maxHealth;
 
         HealthBarImage.fillAmount = Mathf.Clamp(health / maxHealth, 0, 1f);
     }
