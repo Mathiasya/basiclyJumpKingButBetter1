@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyBehavior : MonoBehaviour
 {
     private float speed = 3f;
-    private float rayDistance = 2f;
+    private float rayDistance = .5f;
     private bool movingRight;
     public Transform groundCollision;
     [SerializeField] private Animator animator;
@@ -35,7 +35,7 @@ public class EnemyBehavior : MonoBehaviour
 
         if (isPlayerNear && groundCheck.collider)
         {
-            
+            Debug.Log("Playernear");
             float xPositionDifference = playerTransform.position.x - transform.position.x;
 
             transform.rotation = xPositionDifference < 0 ? left : right;

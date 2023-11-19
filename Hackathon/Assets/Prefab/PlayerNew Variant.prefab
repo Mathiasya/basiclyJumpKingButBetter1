@@ -82,6 +82,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerNew Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7595983378451503777, guid: 866e2b9d50a534c4d93963c97353463b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 866e2b9d50a534c4d93963c97353463b, type: 3}
 --- !u!95 &2321235781142058169 stripped
@@ -116,7 +121,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &24780192
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -633,10 +638,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb0aefdc79371e644897b15a627aa114, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   baseMoveSpeed: 70
-  baseJumpStrength: 2
+  baseJumpStrength: 3
   jitterFrequency: 5
   jitterStrength: 0.3
   activateJitter: 0
@@ -661,8 +666,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61a772a4b7176c540883b31eb2743059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   maxHealth: 100
   currentHealth: 0
   deathSound: {fileID: 0}

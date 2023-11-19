@@ -11,6 +11,7 @@ public class PlayerMovementController : MonoBehaviour
     [SerializeField] private float waterSpeedRatio;
     [SerializeField] private Animator animator;
     [SerializeField] private AudioSource audiosource;
+   
 
     [SerializeField] SpriteRenderer playerSpriteRenderer;
 
@@ -26,6 +27,8 @@ public class PlayerMovementController : MonoBehaviour
     private bool isWalking;
     private bool isFlying;
 
+   
+
      
     
 
@@ -40,6 +43,7 @@ public class PlayerMovementController : MonoBehaviour
         playerBody = GetComponent<Rigidbody2D>();
         isWalking = animator.GetBool("IsWalking");
         isFlying = animator.GetBool("IsFlying");
+        
 
     }
 
@@ -71,6 +75,8 @@ public class PlayerMovementController : MonoBehaviour
             animator.SetBool("IsFlying", false);
             playerBody.gravityScale /= waterSpeedRatio;
             isInWater = false;
+
+           
         }
         direction.x = Input.GetAxisRaw("Horizontal");
         direction = direction.normalized;
@@ -83,6 +89,8 @@ public class PlayerMovementController : MonoBehaviour
         {
             playerSpriteRenderer.flipX = false;
         }
+
+        
 
         Vector2 velocity = baseMoveSpeed * Time.fixedDeltaTime * direction;
         velocity.x = Mathf.Lerp(playerBody.velocity.x, velocity.x, 0.25f);
@@ -116,6 +124,8 @@ public class PlayerMovementController : MonoBehaviour
             footDirection *= -1;
             playerBody.gravityScale *= -1;
         }
+
+        
     }
 
 
@@ -134,11 +144,23 @@ public class PlayerMovementController : MonoBehaviour
 
         direction.x = Input.GetAxisRaw("Horizontal"); 
         direction.y = Input.GetAxisRaw("Vertical") * -footDirection.y;
+
+        if (direction.x < 0)
+        {
+            playerSpriteRenderer.flipX = true;
+        }
+        else if (direction.x > 0)
+        {
+            playerSpriteRenderer.flipX = false;
+        }
+
         direction = direction.normalized;
         Vector2 velocity = baseMoveSpeed * Time.fixedDeltaTime * direction;
         velocity.x = Mathf.Lerp(playerBody.velocity.x, velocity.x, 0.2f);
         velocity.y = Mathf.Max(Mathf.Lerp(playerBody.velocity.y, velocity.y, 0.2f), -20);
         playerBody.velocity = velocity;
+
+
     }
 
     void FlightMechanics() 
@@ -151,6 +173,8 @@ public class PlayerMovementController : MonoBehaviour
         velocity.y = Mathf.Lerp(playerBody.velocity.y, velocity.y, 0.1f);
         Debug.Log(velocity);
         playerBody.velocity = Jitter(velocity);
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
