@@ -638,8 +638,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb0aefdc79371e644897b15a627aa114, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   baseMoveSpeed: 70
   baseJumpStrength: 3
   jitterFrequency: 5
@@ -666,11 +666,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61a772a4b7176c540883b31eb2743059, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
-  deathSound: {fileID: 0}
+  deathSound: {fileID: 98661042287310968, guid: f678c27ad120ba149b11470dead9a2ee,
+    type: 3}
 --- !u!212 &8656046299919737320 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 2714018767019191606, guid: 866e2b9d50a534c4d93963c97353463b,
