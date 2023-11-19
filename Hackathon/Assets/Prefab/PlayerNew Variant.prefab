@@ -82,6 +82,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerNew
       objectReference: {fileID: 0}
+    - target: {fileID: 7595983378451503777, guid: 866e2b9d50a534c4d93963c97353463b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 866e2b9d50a534c4d93963c97353463b, type: 3}
 --- !u!95 &2321235781142058169 stripped
@@ -116,7 +121,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &24780192
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -170,13 +175,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMoveSpeed: 70
-  baseJumpStrength: 2
+  baseJumpStrength: 3
   jitterFrequency: 5
   jitterStrength: 0.3
   activateJitter: 0
   waterSpeedRatio: 0.3
   animator: {fileID: 2321235781142058169}
+  audiosource: {fileID: 0}
   playerSpriteRenderer: {fileID: 8656046299919737320}
+  isInWater: 0
 --- !u!212 &8656046299919737320 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 2714018767019191606, guid: 866e2b9d50a534c4d93963c97353463b,

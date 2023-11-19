@@ -29,7 +29,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0) {
             Die();
         }
-        if (playerBody.velocity.y < -100f )
+        if (playerBody.velocity.y < -100f || playerBody.velocity.y > 100f)
         {
             Debug.Log("Death by out of world");
             Die();
