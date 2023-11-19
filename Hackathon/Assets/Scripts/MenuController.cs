@@ -13,7 +13,7 @@ public class MenuController : MonoBehaviour
 
     public void NewGameDialogYes()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(_newGameLevel);       
+        UnityEngine.SceneManagement.SceneManager.LoadScene("LevelDesign");       
     }
 
 
