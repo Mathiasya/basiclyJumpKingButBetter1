@@ -6,6 +6,6 @@ public class EnemyAttack : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerHealth.instance.GetDamage(20);
+        PlayerHealthSound.instance.GetDamage(20);
     }
 }
