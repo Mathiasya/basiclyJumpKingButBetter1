@@ -28,6 +28,8 @@ namespace UnityEngine
 
         [SerializeField] private AudioSource fallSound;
 
+        
+
         private Rigidbody2D playerBody;
         private bool isAirBorne;
         private Vector2 position;
@@ -121,7 +123,7 @@ namespace UnityEngine
 
             if ((direction.x > 0.02f || direction.x < -0.02f) && !isWalking && !isFlying)
             {
-                Debug.Log("Moving");
+                //Debug.Log("Moving");
                 animator.SetBool("IsWalking", true);
             }
             else
@@ -222,7 +224,12 @@ namespace UnityEngine
                 isInFlight = false;
                 playerBody.gravityScale = lastGravity;
             }
+            
         }
+
+       
+
+
 
         bool IsInWater()
         {

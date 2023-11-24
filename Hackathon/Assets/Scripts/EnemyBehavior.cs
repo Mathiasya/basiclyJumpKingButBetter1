@@ -113,8 +113,9 @@ public class EnemyBehavior : MonoBehaviour
         } 
     }
 
-    public void OnTriggerExit2D(Collider2D collision)
+    public void OnTriggerExit2D(Collider2D other)
     {
+        if (other.gameObject == CompareTag("Player"))
         isPlayerNear = false;
         Debug.Log("ontriggerexit");
     }
